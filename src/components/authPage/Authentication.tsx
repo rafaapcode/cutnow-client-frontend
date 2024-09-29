@@ -1,6 +1,13 @@
+import { useCallback } from "react";
 import { FcGoogle } from "react-icons/fc";
+import redirectGoogleLink from "../../lib/CreateLinkRedirectGoogle";
 
 const Authentication = () => {
+  const signInWithGoogle = useCallback(() => {
+    const queryParamsToRedirectToGoogle = redirectGoogleLink();
+    window.location.href = `${import.meta.env.VITE_BASE_URL}?${queryParamsToRedirectToGoogle}`;
+  }, []);
+
   return (
     <div className="w-full h-full px-3 md:px-5 lg:px-1 flex flex-col items-center justify-evenly">
       <img src="/logo.png" alt="CutNow Logo" className="size-24 md:size-36 lg:hidden"/>
@@ -11,7 +18,7 @@ const Authentication = () => {
       <h2 className="text-xl md:text-3xl tracking-wide md:leading-loose">
         Faça login com a sua conta do Google e ache a barbearia mais perto de você
       </h2>
-      <button className="bg-white/10 rounded-lg px-5 flex justify-between items-center gap-5 py-5 text-lg md:text-2xl hover:bg-white/20 transition-all duration-100">
+      <button onClick={signInWithGoogle} className="bg-white/10 rounded-lg px-5 flex justify-between items-center gap-5 py-5 text-lg md:text-2xl hover:bg-white/20 transition-all duration-100">
         <FcGoogle className="size-7"/> Entrar com Google
       </button>
     </div>
