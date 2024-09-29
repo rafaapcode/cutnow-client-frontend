@@ -1,5 +1,11 @@
-function App() {
-  return <div className="bg-red-300">Olá mundo</div>;
-}
+import { Route, Routes } from "react-router-dom";
+import AuthPage from "./pages/AuthPage";
 
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<AuthPage />} />
+    </Routes>
+  );
+}
 export default App;
