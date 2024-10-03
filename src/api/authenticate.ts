@@ -1,7 +1,7 @@
 import client from "../lib/axios";
 
 type Response = {
-  status: boolean;
+  error: boolean;
   data?: any;
   message: string;
 };
@@ -11,14 +11,14 @@ export async function AuthUser(code: string): Promise<Response> {
     const { data } = await client.post("/auth", { code });
 
     return {
-      status: false,
+      error: false,
       message: "User authenticated",
       data,
     };
   } catch (error: any) {
     console.log(error.response);
     return {
-      status: false,
+      error: true,
       message: "Erro ao autenticar o usuário",
     };
   }

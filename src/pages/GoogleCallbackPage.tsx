@@ -13,12 +13,22 @@ const GoogleCallbackPage = () => {
   useEffect(() => {
     if (code) {
       AuthUser(code)
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err));
+        .then((res) => {
+          console.log(res);
+          if(!res.error) {
+            navigate("/home");
+          } else {
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          console.log("GoogleCallbackPage (Error): ", err);
+          navigate("/");
+        });
     } else {
       navigate("/");
     }
-  }, []);
+  }, [code]);
   
   return (
     <div className="flex items-center justify-center h-screen">
