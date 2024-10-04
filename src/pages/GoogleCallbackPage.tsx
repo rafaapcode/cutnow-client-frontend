@@ -28,7 +28,7 @@ const GoogleCallbackPage = () => {
     } else {
       navigate("/");
     }
-  }, [code]);
+  }, []);
   
   return (
     <div className="flex items-center justify-center h-screen">
