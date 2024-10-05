@@ -1,4 +1,4 @@
-import client from "../lib/axios";
+import client from "../utils/axios";
 
 type Response = {
   error: boolean;

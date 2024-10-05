@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { FcGoogle } from "react-icons/fc";
-import redirectGoogleLink from "../../lib/CreateLinkRedirectGoogle";
+import redirectGoogleLink from "../../utils/CreateLinkRedirectGoogle";
 
 const Authentication = () => {
   const signInWithGoogle = useCallback(() => {
