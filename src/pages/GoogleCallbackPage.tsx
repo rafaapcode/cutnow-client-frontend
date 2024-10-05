@@ -1,8 +1,7 @@
-import Lottie from "lottie-react";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { AuthUser } from "../api/authenticate";
-import LoadingBarber from "../assets/animations/barber-loading.json";
+import { LoadingPage } from "../components/LoadingPage";
 
 const GoogleCallbackPage = () => {
   const [searchParams] = useSearchParams();
@@ -31,9 +30,7 @@ const GoogleCallbackPage = () => {
   }, []);
   
   return (
-    <div className="flex items-center justify-center h-screen">
-      <Lottie animationData={LoadingBarber} className="size-32 md:size-40" />
-    </div>
+    <LoadingPage />
   );
 };
 
