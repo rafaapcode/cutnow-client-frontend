@@ -9,29 +9,30 @@ const GoogleCallbackPage = () => {
   const queryParams = new URLSearchParams(searchParams);
   const code = queryParams.get("code");
 
+  async function LoginUser(code: string) {
+    try {
+      const res = await AuthUser(code);
+      console.log(res);
+      if (!res.error) {
+        navigate("/");
+      } else {
+        navigate("/sign-in");
+      }
+    } catch (error: any) {
+      console.log("GoogleCallbackPage (Error): ", error);
+      navigate("/sign-in");
+    }
+  }
+
   useEffect(() => {
     if (code) {
-      AuthUser(code)
-        .then((res) => {
-          console.log(res);
-          if(!res.error) {
-            navigate("/home");
-          } else {
-            navigate("/");
-          }
-        })
-        .catch((err) => {
-          console.log("GoogleCallbackPage (Error): ", err);
-          navigate("/");
-        });
+      LoginUser(code);
     } else {
-      navigate("/");
+      navigate("/sign-in");
     }
   }, []);
-  
-  return (
-    <LoadingPage />
-  );
+
+  return <LoadingPage />;
 };
 
 export default GoogleCallbackPage;
