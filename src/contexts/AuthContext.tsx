@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useState } from "react";
+import { storageKeys } from "../config/storageKeys";
 
 interface IAuthContextValue {
   signedIn: boolean;
@@ -13,15 +14,15 @@ interface IAuthContextValue {
 export const AuthContext = createContext({} as IAuthContextValue);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [signedIn, setSignedIn] = useState(() => !!localStorage.getItem("cutnow:accessToken"));
+  const [signedIn, setSignedIn] = useState(() => !!localStorage.getItem(storageKeys.accessToken));
 
   const logIn = useCallback((token: string) => {
-    localStorage.setItem("cutnow:accessToken", token);
+    localStorage.setItem(storageKeys.accessToken, token);
     setSignedIn(true);
   }, []);
 
   const logOut = useCallback(() => {
-    localStorage.removeItem("cutnow:accessToken");
+    localStorage.removeItem(storageKeys.accessToken);
     setSignedIn(false);
   }, []);
 
