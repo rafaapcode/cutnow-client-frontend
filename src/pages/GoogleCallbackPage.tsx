@@ -1,27 +1,24 @@
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { AuthUser } from "../api/authenticate";
 import { LoadingPage } from "../components/LoadingPage";
+import useAuth from "../hooks/useAuth";
+import { AuthService } from "../services/AuthService";
 
 const GoogleCallbackPage = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const queryParams = new URLSearchParams(searchParams);
   const code = queryParams.get("code");
+  const { login } = useAuth();
 
   async function LoginUser(code: string) {
-    try {
-      const res = await AuthUser(code);
-      console.log(res);
-      if (!res.error) {
-        navigate("/");
-      } else {
-        navigate("/sign-in");
-      }
-    } catch (error: any) {
-      console.log("GoogleCallbackPage (Error): ", error);
+    const { status, token } = await AuthService.logInUser(code);
+    if(status) {
+      login(token);
+      navigate("/");
+    } else {
       navigate("/sign-in");
-    }
+    } 
   }
 
   useEffect(() => {
