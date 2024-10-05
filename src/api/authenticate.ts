@@ -9,7 +9,6 @@ type Response = {
 export async function AuthUser(code: string): Promise<Response> {
   try {
     const { data } = await client.post("/auth", { code });
-
     return {
       error: false,
       message: "User authenticated",

@@ -7,7 +7,7 @@ export class AuthService {
       if (!res.error) {
         return {
           status: true,
-          token: res.data.token.token,
+          token: res.data.token,
         };
       } else {
         return {
