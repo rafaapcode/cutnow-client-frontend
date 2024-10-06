@@ -1,3 +1,4 @@
 export const storageKeys = {
-  accessToken: "cutnow:accessToken"
+  accessToken: "cutnow:accessToken",
+  user: "cutnow:userdata"
 };

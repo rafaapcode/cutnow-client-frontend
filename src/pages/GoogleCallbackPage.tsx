@@ -15,7 +15,7 @@ const GoogleCallbackPage = () => {
     const { status, token, data } = await AuthService.logInUser(code);
     if (status) {
       login(token!);
-      setuser({email: data?.email as string, id: data?.id as string, nome: data?.nome as string });
+      setuser({email: data?.email as string, id: data?.id as string, nome: data?.nome as string,avatar: data?.avatar as string });
       navigate("/");
     } else {
       navigate("/sign-in");

@@ -4,6 +4,7 @@ type AuthServiceResponse = {
   status: boolean;
   token?: string;
   data?: {
+    avatar: string;
     email: string;
     id: string;
     nome: string;
