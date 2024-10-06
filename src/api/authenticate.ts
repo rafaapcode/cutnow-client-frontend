@@ -12,7 +12,7 @@ export async function AuthUser(code: string): Promise<Response> {
     return {
       error: false,
       message: "User authenticated",
-      data,
+      data
     };
   } catch (error: any) {
     console.log(error.response);
