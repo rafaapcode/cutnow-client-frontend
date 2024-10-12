@@ -3,8 +3,12 @@ import useAuth from "../hooks/useAuth";
 const HomePage = () => {
   const {user} = useAuth();
 
-  console.log("User Homepage", user);
-
+  // useEffect(() => {
+  //   ScheduleService.getSchedules(user.email)
+  //     .then(res => console.log(res))
+  //     .catch(err  => console.log(err))
+  // }, []);
+  console.log(user);
   return (
     <div className="text-white h-screen flex justify-center items-center text-3xl">
       HomePage
