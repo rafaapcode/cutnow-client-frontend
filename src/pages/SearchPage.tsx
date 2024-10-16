@@ -1,9 +1,9 @@
-import { useSearchParams } from "react-router-dom";
+import useQueryParams from "@/hooks/useQueryParams";
 
 const SearchPage = () => {
-  const [searchParams] = useSearchParams();
+  const { value } = useQueryParams("barbershop");
   return (
-    <div className="text-white">{searchParams.get("barbershop")}</div>
+    <div className="text-white">{value}</div>
   )
 }
 

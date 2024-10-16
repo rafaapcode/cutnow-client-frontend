@@ -1,14 +1,15 @@
+import useQueryParams from "@/hooks/useQueryParams";
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoadingPage } from "../components/LoadingPage";
 import useAuth from "../hooks/useAuth";
 import { AuthService } from "../services/AuthService";
 
 const GoogleCallbackPage = () => {
-  const [searchParams] = useSearchParams();
+  const { value: code } = useQueryParams("code");
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(searchParams);
-  const code = queryParams.get("code");
+  // const queryParams = new URLSearchParams(searchParams);
+  // const code = queryParams.get("code");
   const { login, setuser } = useAuth();
 
   async function LoginUser(code: string) {

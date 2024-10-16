@@ -15,6 +15,7 @@ const Header = () => {
 
   const handleClick = useCallback(() => {
     navigate(`/search?barbershop=${searchValue}`);
+    setSearchValue("");
   }, [searchValue]);
 
   const handleLogout = useCallback(() => {
