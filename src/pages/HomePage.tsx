@@ -10,7 +10,7 @@ const HomePage = () => {
   // }, []);
   console.log(user);
   return (
-    <div className="text-white h-screen flex justify-center items-center text-3xl">
+    <div className="text-white flex justify-center items-center text-3xl">
       HomePage
     </div>
   );
