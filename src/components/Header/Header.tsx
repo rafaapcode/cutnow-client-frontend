@@ -1,10 +1,11 @@
-import { Suspense, useCallback, useState } from "react";
-import { CiCalendar } from "react-icons/ci";
+import { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 import Search from "./Search";
-import UserPhoto from "./UserPhoto";
+import UserMenu from "./UserMenu";
 
 const Header = () => {
+  const { logout, user } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
@@ -16,30 +17,25 @@ const Header = () => {
     navigate(`/search?barbershop=${searchValue}`);
   }, [searchValue]);
 
+  const handleLogout = useCallback(() => {
+    logout();
+  }, []);
+
   return (
-    <div className="border-b-2 border-neutral-800 h-28 flex items-center justify-between text-white">
-      <div className="w-[87px] h-[72px] md:w-[101px] md:h-[83px]">
+    <div className="px-3 lg:px-0 border-b-2 border-neutral-800 h-28 flex items-center justify-between text-white">
+      <div className="w-[60px] md:w-[90px] md:h-[80px]">
         <Link to="/">
           <img src="/logo.png" alt="logo of cutnow" className="object-cover" />
         </Link>
       </div>
-      <div className="w-[45%]">
+      <div className="w-[60%] md:w-[45%]">
         <Search
           value={searchValue}
           onChange={handleChange}
           onClick={handleClick}
         />
       </div>
-      <div className="flex items-center gap-5">
-        <Link to="/schedules">
-          <CiCalendar className="size-6" />
-        </Link>
-        <div className="hidden lg:block">
-          <Suspense fallback={<h1>loading ...</h1>}>
-            <UserPhoto />
-          </Suspense>
-        </div>
-      </div>
+      <UserMenu avatar={user.avatar} handleLogout={handleLogout}/>
     </div>
   );
 };
