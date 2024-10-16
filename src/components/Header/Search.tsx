@@ -1,14 +1,21 @@
+import { memo } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 
-const Search = () => {
+type ISearchProps = {
+  value: string;
+  onChange: (e: any) => void;
+  onClick: () => void;
+}
+
+const Search = ({ value,  onChange, onClick}: ISearchProps) => {
   return (
     <div className="flex items-center gap-2 justify-between">
-      <input type="text" className="w-[95%] bg-neutral-800 p-2 rounded-md transition-all duration-100 outline-none" />
-      <button className="bg-neutral-800 cursor-pointer transition-all duration-100 hover:bg-neutral-700 rounded-md p-1.5">
+      <input value={value} onChange={onChange} type="text" className="w-[95%] bg-neutral-800 p-2 rounded-md transition-all duration-100 outline-none" />
+      <button onClick={onClick} className="bg-neutral-800 cursor-pointer transition-all duration-100 hover:bg-neutral-700 rounded-md p-1.5">
         <IoSearchOutline className="size-6" />
       </button>
     </div>
   );
 };
 
-export default Search;
+export default memo(Search);
