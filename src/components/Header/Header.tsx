@@ -23,7 +23,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="px-3 lg:px-0 border-b-2 border-neutral-800 h-28 flex items-center justify-between text-white">
+    <div className="px-3 lg:px-0 border-b-2 border-neutral-800 bg-black h-28 flex items-center justify-between text-white overflow-hidden">
       <div className="w-[60px] md:w-[90px] md:h-[80px]">
         <Link to="/">
           <img src="/logo.png" alt="logo of cutnow" className="object-cover" />

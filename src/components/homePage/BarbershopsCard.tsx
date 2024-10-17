@@ -14,7 +14,7 @@ const BarbershopsCard = ({ barbershop }: IBarbershopCard) => {
   console.log(imageUrl, barbershopName, status, id);
   const statusStyle = status === "Aberto" ? "bg-green-600" : "bg-red-600";
   return (
-    <div className="w-[60%] h-[350px] bg-neutral-900 rounded-md p-3 mx-auto flex flex-col gap-5">
+    <div className="w-[90%] md:w-[80%] lg:w-[60%] h-[350px] bg-neutral-900 rounded-md p-3 mx-auto flex flex-col gap-5">
       <div className="w-full h-[230px] overflow-hidden rounded-md">
         <img
           src="/usuario-image.jpg"
@@ -22,7 +22,7 @@ const BarbershopsCard = ({ barbershop }: IBarbershopCard) => {
           className="object-cover h-full w-full"
         />
       </div>
-      <h2 className="text-lg">Nome do Barbeiro</h2>
+      <h2 className="text-lg">Nome da Barbeira</h2>
       <div className="flex justify-between items-center">
         <Link
           to={`/barbershops/${id}`}
