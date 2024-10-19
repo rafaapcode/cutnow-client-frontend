@@ -4,19 +4,21 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../ui/carousel";
+} from "./ui/carousel";
 
 const Slider = ({
   data,
   Component,
   resourceName,
+  className
 }: {
   data: any[];
   Component: any;
   resourceName: string;
+  className?: string;
 }) => {
   return (
-    <Carousel className="w-[70%] md:w-[80%] lg:w-full h-fit p-2 mx-auto">
+    <Carousel className={className ? className : "w-[70%] md:w-[80%] lg:w-full h-fit p-2 mx-auto"}>
       <CarouselContent>
         {data.map((item, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/4">

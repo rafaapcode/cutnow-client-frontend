@@ -1,8 +1,8 @@
 import BarbersCards from "@/components/barbershopPage/BarbersCards";
 import BarbershopInfo from "@/components/barbershopPage/BarbershopInfo";
 import ServiceTable from "@/components/barbershopPage/ServiceTable";
-import Slider from "@/components/barbershopPage/Slider";
 import StructureImage from "@/components/barbershopPage/StructureImage";
+import Slider from "@/components/Slider";
 import { useParams } from "react-router-dom";
 
 const BarbershopPage = () => {
