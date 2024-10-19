@@ -1,3 +1,4 @@
+import BarbershopPage from "@/pages/BarbershopPage";
 import { Route, Routes } from "react-router-dom";
 import AuthPage from "../pages/AuthPage";
 import GoogleCallbackPage from "../pages/GoogleCallbackPage";
@@ -15,6 +16,7 @@ export default function Router() {
           <Route path="/" element={<HomePage />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/schedules" element={<SchedulesPage />} />
+          <Route path="/barbershop/:id" element={<BarbershopPage />} />
         </Route>
       </Route>
 

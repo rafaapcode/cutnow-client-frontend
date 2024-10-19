@@ -1,3 +1,5 @@
+import usePathName from "@/hooks/usePathName";
+import useQueryParams from "@/hooks/useQueryParams";
 import { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
@@ -8,13 +10,20 @@ const Header = () => {
   const { logout, user } = useAuth();
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
+  const isSearchPage = usePathName("/search");
+  const { setSearchParams } = useQueryParams();
 
   const handleChange = useCallback((e: any) => {
     setSearchValue(e.target.value);
   }, []);
 
   const handleClick = useCallback(() => {
-    navigate(`/search?barbershop=${searchValue}`);
+    if (isSearchPage) {
+      setSearchParams({ barbershop: searchValue });
+    } else {
+      navigate(`/search?barbershop=${searchValue}`);
+    }
+
     setSearchValue("");
   }, [searchValue]);
 
@@ -36,7 +45,7 @@ const Header = () => {
           onClick={handleClick}
         />
       </div>
-      <UserMenu avatar={user.avatar} handleLogout={handleLogout}/>
+      <UserMenu avatar={user.avatar} handleLogout={handleLogout} />
     </div>
   );
 };

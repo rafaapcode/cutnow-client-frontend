@@ -25,7 +25,7 @@ const BarbershopsCard = ({ barbershop }: IBarbershopCard) => {
       <h2 className="text-lg">Nome da Barbeira</h2>
       <div className="flex justify-between items-center">
         <Link
-          to={`/barbershops/${id}`}
+          to={`/barbershop/${id}`}
           className="bg-neutral-700 px-3 py-1 rounded-md font-bold tracking-wide hover:bg-neutral-800 transition-all duration-100"
         >
           Detalhes
