@@ -40,7 +40,7 @@ const BarbershopInfo = () => {
           <BarbershopImage />
         </div>
       </div>
-      <div className="md:hidden last:mt-5">
+      <div className="md:hidden mt-5">
         <BarbershopImage />
       </div>
     </>
