@@ -1,3 +1,4 @@
+import BarbersCards from "@/components/barbershopPage/BarbersCards";
 import BarbershopInfo from "@/components/barbershopPage/BarbershopInfo";
 import ServiceTable from "@/components/barbershopPage/ServiceTable";
 import Slider from "@/components/barbershopPage/Slider";
@@ -25,6 +26,44 @@ const BarbershopPage = () => {
     "/barbershop-banner.jpg",
   ];
 
+  const barber = [
+    {
+      barberPhoto: "/barberiros-foto.jpg",
+      barberName: "Matheus",
+      id: "123131312",
+    },
+    {
+      barberPhoto: "/barberiros-foto.jpg",
+      barberName: "Matheus",
+      id: "123131312",
+    },
+    {
+      barberPhoto: "/barberiros-foto.jpg",
+      barberName: "Matheus",
+      id: "123131312",
+    },
+    {
+      barberPhoto: "/barberiros-foto.jpg",
+      barberName: "Matheus",
+      id: "123131312",
+    },
+    {
+      barberPhoto: "/barberiros-foto.jpg",
+      barberName: "Matheus",
+      id: "123131312",
+    },
+    {
+      barberPhoto: "/barberiros-foto.jpg",
+      barberName: "Matheus",
+      id: "123131312",
+    },
+    {
+      barberPhoto: "/barberiros-foto.jpg",
+      barberName: "Matheus",
+      id: "123131312",
+    },
+  ];
+
   return (
     <div className="w-full">
       <BarbershopInfo />
@@ -38,7 +77,14 @@ const BarbershopPage = () => {
           Component={StructureImage}
         />
       </div>
-      <ServiceTable services={services}/>
+      <ServiceTable services={services} />
+      <div className="w-full pb-16 md:mt-3">
+        <h2 className="text-xl md:text-2xl font-semibold mx-10 lg:mx-36">
+          Conheça nossos especialistas
+        </h2>
+        {/* <BarbersCards /> */}
+        <Slider data={barber}  resourceName="barber" Component={BarbersCards}/>
+      </div>
     </div>
   );
 };
