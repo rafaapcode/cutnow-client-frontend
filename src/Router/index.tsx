@@ -1,3 +1,4 @@
+import BarberPage from "@/pages/BarberPage";
 import BarbershopPage from "@/pages/BarbershopPage";
 import { Route, Routes } from "react-router-dom";
 import AuthPage from "../pages/AuthPage";
@@ -8,6 +9,7 @@ import SearchPage from "../pages/SearchPage";
 import AuthGuard from "./AuthGuard";
 import Layout from "./Layout";
 
+
 export default function Router() {
   return (
     <Routes>
@@ -17,6 +19,7 @@ export default function Router() {
           <Route path="/search" element={<SearchPage />} />
           <Route path="/schedules" element={<SchedulesPage />} />
           <Route path="/barbershop/:id" element={<BarbershopPage />} />
+          <Route path="/barber/:id" element={<BarberPage />} />
         </Route>
       </Route>
 
