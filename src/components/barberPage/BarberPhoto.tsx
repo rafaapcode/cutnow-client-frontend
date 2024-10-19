@@ -1,16 +1,25 @@
-import { CiCalendar } from "react-icons/ci"
+import { useCallback, useState } from "react";
+import BarberCalendar from "./BarberCalendar";
 
 const BarberPhoto = () => {
+  const [date, setDate] = useState("");
+
+  const handleClick = () => {
+    console.log(date);
+  }
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+      setDate(e.target.value);
+  }, []);
+
   return (
-    <div className="col-span-1 w-[80%] h-[350px] rounded-md bg-neutral-900 p-5">
+    <div className="col-span-4 md:col-span-2 lg:col-span-1 w-full md:w-[90%] lg:w-[80%] h-[350px] rounded-md bg-neutral-900 p-5">
       <div className="h-[85%] bg-neutral-600 rounded-md overflow-hidden">
         <img src="/barberiros-foto.jpg" alt="baber photo" className="object-cover w-full h-full"/>
       </div>
       <div className="flex justify-between h-[15%] items-center">
         <h2 className="text-xl font-semibold">Nome barbeiro</h2>
-        <button className="bg-[#D3FB3F] hover:bg-[#9cbb2c] p-1 rounded-md transition-all duration-100">
-          <CiCalendar className="size-5 text-black"/>
-        </button>
+        <BarberCalendar handleChange={handleChange}  handleClick={handleClick}/>
       </div>
     </div>
   )

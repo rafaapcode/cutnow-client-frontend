@@ -20,7 +20,7 @@ const BarberPage = () => {
   ]
 
   return (
-    <div className="pt-5 grid grid-cols-4 gap-2">
+    <div className="p-5 lg:pt-5 grid grid-cols-4 gap-2 gap-y-10 lg:gap-y-3">
       <BarberPhoto />
       <BarberDescription />
       <BarberPortfolio data={portfolioBarber}/>

@@ -1,8 +1,8 @@
 const BarberDescription = () => {
   return (
-    <div className="col-span-3 p-5 w-full h-[350px] rounded-md bg-neutral-900 overflow-hidden">
-      <h2 className="mb-3 text-2xl font-semibold">Sobre Mim</h2>
-      <p className="text-neutral-500">
+    <div className="col-span-4 md:col-span-2 lg:col-span-3 p-5 w-full h-[350px] rounded-md bg-neutral-900 overflow-hidden">
+      <h2 className="mb-3 text-xl lg:text-2xl font-semibold">Sobre Mim</h2>
+      <p className="text-neutral-500 text-sm lg:text-base">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
