@@ -2,27 +2,29 @@ import { Link } from "react-router-dom";
 
 type IBarbershopCard = {
   barbershop: {
-    imageUrl: string;
-    barbershopName: string;
-    status: string;
+    nomeDaBarbearia: string;
+    informacoes: {
+      logo: string;
+      status: string;
+    }
     id: string;
   };
 };
 
 const BarbershopsCard = ({ barbershop }: IBarbershopCard) => {
-  const { imageUrl, barbershopName, status, id } = barbershop;
-  console.log(imageUrl, barbershopName, status, id);
+  const { id, informacoes: {logo, status}, nomeDaBarbearia,  } = barbershop;
+
   const statusStyle = status === "Aberto" ? "bg-green-600" : "bg-red-600";
   return (
     <div className="w-[90%] md:w-[80%] lg:w-[60%] h-[350px] bg-neutral-900 rounded-md p-3 mx-auto flex flex-col gap-5">
       <div className="w-full h-[230px] overflow-hidden rounded-md">
         <img
-          src="/usuario-image.jpg"
+          src={logo}
           alt="barbershop logo"
           className="object-cover h-full w-full"
         />
       </div>
-      <h2 className="text-lg">Nome da Barbeira</h2>
+      <h2 className="text-lg">{nomeDaBarbearia}</h2>
       <div className="flex justify-between items-center">
         <Link
           to={`/barbershop/${id}`}
