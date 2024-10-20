@@ -17,10 +17,38 @@ export type AllBarbershopsResponse = {
   }[];
 }
 
+export type BarbershopByNameResponse = {
+  barbershops: {
+    id: string;
+    nomeDaBarbearia: string;
+    informacoes: {
+      logo: string;
+      status: string;
+    }
+  }[];
+}
+
 export async function GetAllBarbershops(): Promise<Response<AllBarbershopsResponse>> {
   try {
     const {data} = await client.get("/barbershop");
 
+    return {
+      error: data.error,
+      message: data.message,
+      data: data.barbershops
+    }
+  } catch (error: any ) {
+    console.log(error.response);
+    return {
+      error: true,
+      message: error.message
+    }
+  }
+}
+
+export async function GetBarbershopByName(nome: string): Promise<Response<BarbershopByNameResponse>> {
+  try {
+    const {data} = await client.get(`/barbershop/barbershopbyname?name=${nome}`);
     return {
       error: data.error,
       message: data.message,

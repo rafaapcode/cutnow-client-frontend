@@ -1,6 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
+import { ReactNode } from "react";
 
-const DataProvider = ({ getData, render, queryKey, timeInCache }: any) => {
+type IDataProviderProps = {
+  getData: () => Promise<{error: boolean; message: string; data?: any}>;
+  render: (props: any) => ReactNode;
+  queryKey: any[];
+  timeInCache?: number;
+}
+
+const DataProvider = ({ getData, render, queryKey, timeInCache }: IDataProviderProps): ReactNode => {
   const { data, error, isLoading } = useQuery(
     {
       queryKey,
@@ -18,7 +26,7 @@ const DataProvider = ({ getData, render, queryKey, timeInCache }: any) => {
 
   console.log("Dados ",data);
   console.log("Erro ", error);
-  return render({data, error, isLoading});
+  return render({data, error, isLoading})
 }
 
 export default DataProvider

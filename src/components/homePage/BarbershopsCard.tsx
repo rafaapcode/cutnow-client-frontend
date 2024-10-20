@@ -12,6 +12,13 @@ type IBarbershopCard = {
 };
 
 const BarbershopsCard = ({ barbershop }: IBarbershopCard) => {
+
+  if(!barbershop) {
+    return (
+      <h2 className="text-xl">Nenhuma barbearia encontrada !</h2>
+    )
+  }
+
   const { id, informacoes: {logo, status}, nomeDaBarbearia,  } = barbershop;
 
   const statusStyle = status === "Aberto" ? "bg-green-600" : "bg-red-600";
