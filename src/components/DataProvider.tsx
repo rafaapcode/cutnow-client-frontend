@@ -25,9 +25,6 @@ const DataProvider = ({ getData, render, queryKey, timeInCache }: IDataProviderP
       }
     }
   );
-
-  console.log("Dados ",data);
-  console.log("Erro ", error);
   return render({data, error, isLoading})
 }
 
