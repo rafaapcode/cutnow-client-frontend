@@ -24,12 +24,16 @@ const BarberPage = () => {
                   </h2>
                 )}
                 {props.isLoading ? (
-                  <LoadingPage />
+                  <div className="mx-auto col-span-full">
+                    <LoadingPage />
+                  </div>
                 ) : (
                   <>
                     <BarberPhoto
                       foto={props.data.data.informacoes.foto}
                       nome={props.data.data.nome}
+                      barberId={id}
+                      barbeariaId={props.data.data.barbearia_id}
                     />
                     <BarberDescription
                       description={props.data.data.informacoes.descricao}

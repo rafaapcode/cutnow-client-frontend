@@ -1,4 +1,4 @@
-import { AllBarbershopsResponse, GetAllBarbershops, GetBarber, GetBarbershop, GetBarbershopByName, Response } from "@/api/barbershops";
+import { AllBarbershopsResponse, GetAllBarbershops, GetBarber, GetBarbershop, GetBarbershopByName, GetServices, Response } from "@/api/barbershops";
 
 
 
@@ -30,6 +30,14 @@ export class BarbershopService {
       const barber = await GetBarber(id);
 
       return barber;
+    };
+  }
+
+  static GetServices(id: string) {
+    return async () => {
+      const services = await GetServices(id);
+
+      return services;
     };
   }
 }
