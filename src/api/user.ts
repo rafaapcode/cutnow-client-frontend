@@ -11,9 +11,9 @@ export async function getSchedules(email: string): Promise<Response> {
     const { data } = await client.get(`/user/${email}`);
 
     return {
-      error: false,
-      message: "Agendamentos recuperados",
-      data
+      error: data.error,
+      message: data.message,
+      data: data.schedules
     }
   } catch (error: any) {
     console.log(error.response);

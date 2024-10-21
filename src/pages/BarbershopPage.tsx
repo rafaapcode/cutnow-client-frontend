@@ -13,7 +13,7 @@ const BarbershopPage = () => {
   if (!id) {
     return (
       <>
-        <h1>ID é obrigatório !</h1>
+        <h1>Barbearia não encontrada</h1>
       </>
     );
   }

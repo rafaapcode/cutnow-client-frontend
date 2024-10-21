@@ -28,6 +28,15 @@ export type BarbershopByNameResponse = {
   }[];
 }
 
+export type BarberResponse = {
+  nome: string;
+  informacoes: {
+    foto: string;
+    descricao: string;
+    portfolio: string[];
+  }
+}
+
 export async function GetAllBarbershops(): Promise<Response<AllBarbershopsResponse>> {
   try {
     const {data} = await client.get("/barbershop");
@@ -78,5 +87,23 @@ export async function GetBarbershop(id: string): Promise<Response<any>> {
       error: true,
       message: "Erro ao buscar a barbearia"
     }
+  }
+}
+
+export async function GetBarber(id: string): Promise<Response<BarberResponse>> {
+  try {
+    const {data} = await client.get(`/barber/${id}`);
+
+    return {
+      error: false,
+      message: "Barbeiro encontrado",
+      data: data.barber
+    }
+  } catch (error: any) {
+      console.log(error.response);
+      return {
+        error: true,
+        message: "Erro ao buscar o barbeiro"
+      }
   }
 }
