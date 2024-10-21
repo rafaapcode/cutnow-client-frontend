@@ -29,7 +29,7 @@ const Rows = ({ service }: IRowsTableProps) => {
     <TableRow>
       <TableCell>{service.nomeService}</TableCell>
       <TableCell>{service.tempoMedio}</TableCell>
-      <TableCell>{service.preco}</TableCell>
+      <TableCell>R$ {service.preco}</TableCell>
     </TableRow>
   );
 };

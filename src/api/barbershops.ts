@@ -41,7 +41,7 @@ export async function GetAllBarbershops(): Promise<Response<AllBarbershopsRespon
     console.log(error.response);
     return {
       error: true,
-      message: error.message
+      message: "Erro ao buscar todas barbearias"
     }
   }
 }
@@ -58,7 +58,25 @@ export async function GetBarbershopByName(nome: string): Promise<Response<Barber
     console.log(error.response);
     return {
       error: true,
-      message: error.message
+      message: "Erro ao filtrar as barbearias pelo nome"
+    }
+  }
+}
+
+export async function GetBarbershop(id: string): Promise<Response<any>> {
+  try {
+    const {data} = await client.get(`/barbershop/${id}`);
+
+    return {
+      error: data.error,
+      message: data.message,
+      data: data.barbershop
+    }
+  } catch (error: any) {
+    console.log(error.response);
+    return {
+      error: true,
+      message: "Erro ao buscar a barbearia"
     }
   }
 }

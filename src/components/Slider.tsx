@@ -17,6 +17,23 @@ const Slider = ({
   resourceName: string;
   className?: string;
 }) => {
+
+  if(!data) {
+    return (
+      <>
+        <h2 className="text-2xl">Nenhuma imagem encontrada</h2>
+      </>
+    )
+  }
+
+  if(data.length === 0) {
+    return (
+      <>
+        <h2 className="text-2xl">Nenhuma imagem encontrada</h2>
+      </>
+    )
+  }
+
   return (
     <Carousel className={className ? className : "w-[70%] md:w-[80%] lg:w-full h-fit p-2 mx-auto"}>
       <CarouselContent>
