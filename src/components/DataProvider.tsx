@@ -14,6 +14,7 @@ const DataProvider = ({ getData, render, queryKey, timeInCache }: IDataProviderP
       queryKey,
       staleTime: (timeInCache || 0) * 1000, 
       gcTime: 3600,
+      refetchOnWindowFocus: false,
       queryFn: async () => {
         const res = await getData();
         if(!res.error) {
