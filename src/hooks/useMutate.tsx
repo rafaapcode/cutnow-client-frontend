@@ -1,15 +1,30 @@
-import { useMutation } from "@tanstack/react-query";
+import { UseMutateAsyncFunction, useMutation } from "@tanstack/react-query";
 
 type IMutateProps = {
-  getData: () => Promise<{error: boolean; message: string;}>;
-}
+  getData: () => Promise<{ error: boolean; message: string }>;
+};
 
-export const useMutate = ({ getData }: IMutateProps) => {
-  const { mutate, isPending, isSuccess, isError } = useMutation({
+type IMutateResponse = {
+  mutateAsync: UseMutateAsyncFunction<
+    {
+      error: boolean;
+      message: string;
+    },
+    Error,
+    void,
+    unknown
+  >;
+  isPending: boolean;
+  isError: boolean;
+  isSuccess: boolean;
+};
+
+export const useMutate = ({ getData }: IMutateProps): IMutateResponse => {
+  const { mutateAsync, isPending, isSuccess, isError } = useMutation({
     mutationFn: async () => {
       return await getData();
-    }
+    },
   });
 
-  return {mutate, isPending, isError, isSuccess};
+  return { mutateAsync, isPending, isError, isSuccess };
 };
