@@ -1,4 +1,5 @@
 import { BarbershopService } from "@/services/BarbershopService";
+import { useQueryClient } from "@tanstack/react-query";
 import { add, format } from "date-fns";
 import { CiCalendar } from "react-icons/ci";
 import DataProvider from "../DataProvider";
@@ -35,9 +36,18 @@ const BarberCalendar = ({
   handleService,
   barbeariaId,
 }: IBarberCalendarProps) => {
+  const queryClient = useQueryClient();
+
+  const handleMouseEnter = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["services", barbeariaId],
+      queryFn:BarbershopService.GetServices(barbeariaId)
+    })
+  };
+
   return (
     <Dialog>
-      <DialogTrigger className="bg-[#D3FB3F] hover:bg-[#9cbb2c] p-1 rounded-md transition-all duration-100">
+      <DialogTrigger onMouseEnter={handleMouseEnter} className="bg-[#D3FB3F] hover:bg-[#9cbb2c] p-1 rounded-md transition-all duration-100">
         <CiCalendar className="size-5 text-black" />
       </DialogTrigger>
       <DialogContent className="bg-neutral-900 border-neutral-800 w-[95%] md:w-full">
