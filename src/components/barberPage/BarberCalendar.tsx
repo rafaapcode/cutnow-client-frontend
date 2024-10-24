@@ -1,6 +1,7 @@
 import { BarbershopService } from "@/services/BarbershopService";
 import { useQueryClient } from "@tanstack/react-query";
 import { add, format } from "date-fns";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CiCalendar } from "react-icons/ci";
 import DataProvider from "../DataProvider";
 import List from "../List";
@@ -12,7 +13,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "../ui/dialog";
 
 type IBarberCalendarProps = {
@@ -20,6 +21,7 @@ type IBarberCalendarProps = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleService: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   barbeariaId: string;
+  isPending: boolean;
 };
 
 function ListServices({ service }: { service: {nomeService: string; preco: number;} }) {
@@ -35,6 +37,7 @@ const BarberCalendar = ({
   handleClick,
   handleService,
   barbeariaId,
+  isPending,
 }: IBarberCalendarProps) => {
   const queryClient = useQueryClient();
 
@@ -106,13 +109,12 @@ const BarberCalendar = ({
               );
             }}
           />
-          {/* <select onChange={handleService} name="services" id="service" className="w-1/2 bg-neutral-700 p-2 border-none outline-none rounded-md">
-            <List data={["Barba", "Cabelo"]} resourceName="service" ItemComponent={ListServices} errorMessage="Nenhum serviço encontrado"/>
-          </select> */}
         </div>
         <DialogFooter>
-          <Button variant={"secondary"} onClick={handleClick}>
-            Solicitar agendamento
+          <Button disabled={isPending} variant={"secondary"} onClick={handleClick}>
+            {
+              isPending ? <AiOutlineLoading3Quarters className="size-6 animate-spin"/> : "Solicitar Agendamento"
+            }
           </Button>
         </DialogFooter>
       </DialogContent>

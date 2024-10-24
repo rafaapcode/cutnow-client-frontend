@@ -16,15 +16,14 @@ type IMutateResponse = {
   >;
   isPending: boolean;
   isError: boolean;
-  isSuccess: boolean;
 };
 
 export const useMutate = ({ getData }: IMutateProps): IMutateResponse => {
-  const { mutateAsync, isPending, isSuccess, isError } = useMutation({
+  const { mutateAsync, isPending, isError } = useMutation({
     mutationFn: async () => {
       return await getData();
     },
   });
 
-  return { mutateAsync, isPending, isError, isSuccess };
+  return { mutateAsync, isPending, isError };
 };

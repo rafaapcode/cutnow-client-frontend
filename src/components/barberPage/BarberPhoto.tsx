@@ -1,4 +1,8 @@
+import useAuth from "@/hooks/useAuth";
+import { useMutate } from "@/hooks/useMutate";
+import { RequestService } from "@/services/RequestService";
 import { useCallback, useState } from "react";
+import { toast } from "sonner";
 import BarberCalendar from "./BarberCalendar";
 
 type BarberPhotoProps = {
@@ -8,15 +12,44 @@ type BarberPhotoProps = {
   barbeariaId: string;
 };
 
-const BarberPhoto = ({ foto, nome, barberId, barbeariaId }: BarberPhotoProps) => {
+const BarberPhoto = ({
+  foto,
+  nome,
+  barberId,
+  barbeariaId,
+}: BarberPhotoProps) => {
   const [date, setDate] = useState("");
   const [service, setService] = useState("");
+  const { user } = useAuth();
 
-  const handleClick = () => {
-    console.log(date);
-    console.log(service);
-    console.log(barbeariaId);
-    console.log(barberId);
+  const { isError, isPending, mutateAsync } = useMutate({
+    getData: RequestService.createRequest({
+      barbearia_id: barbeariaId,
+      barbeiro_id: barberId,
+      data: date,
+      emailCliente: user.email,
+      nomeCliente: user.nome,
+      tipoServico: service,
+    }),
+  });
+
+  const handleClick = async () => {
+    const { error, message } = await mutateAsync();
+    if (isError) {
+      console.log("deu ruim");
+      setDate("");
+      setService("");
+    } else {
+      if (error) {
+        setDate("");
+        setService("");
+        toast.error(message);
+      } else {
+        setDate("");
+        setService("");
+        toast.success(message);
+      }
+    }
   };
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,7 +74,13 @@ const BarberPhoto = ({ foto, nome, barberId, barbeariaId }: BarberPhotoProps) =>
       </div>
       <div className="flex justify-between h-[15%] items-center">
         <h2 className="text-xl font-semibold">{nome}</h2>
-        <BarberCalendar barbeariaId={barbeariaId} handleService={handleService} handleChange={handleChange} handleClick={handleClick} />
+        <BarberCalendar
+          isPending={isPending}
+          barbeariaId={barbeariaId}
+          handleService={handleService}
+          handleChange={handleChange}
+          handleClick={handleClick}
+        />
       </div>
     </div>
   );
