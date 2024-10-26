@@ -17,19 +17,18 @@ const Slider = ({
   resourceName: string;
   className?: string;
 }) => {
-
   if(!data) {
     return (
       <>
-        <h2 className="text-2xl">Nenhuma imagem encontrada</h2>
+        <h2 className="text-2xl mb-6">Nenhuma imagem encontrada</h2>
       </>
     )
   }
 
-  if(data.length === 0) {
+  if(data.length === 0 || !data[0]) {
     return (
       <>
-        <h2 className="text-2xl">Nenhuma imagem encontrada</h2>
+        <h2 className="text-xl">Nenhuma imagem encontrada</h2>
       </>
     )
   }

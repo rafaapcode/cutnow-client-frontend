@@ -40,11 +40,11 @@ const BarbershopPage = () => {
                     bairro={data.data.informacoes.bairro}
                     cidade={data.data.informacoes.cidade}
                     estado={data.data.informacoes.estado}
-                    fotoBanner={data.data.informacoes.fotoBanner}
+                    fotoBanner={data.data.informacoes.fotoBanner || "/banner-default.png"}
                     numero={data.data.informacoes.numero}
                     rua={data.data.informacoes.rua}
                     status={data.data.informacoes.status}
-                    logo={data.data.informacoes.logo}
+                    logo={data.data.informacoes.logo || "/default-photo.jpg"}
                     nomeDaBarbearia={data.data.nomeDaBarbearia}
                     horarioAbertura={data.data.informacoes.horarioAbertura}
                     horarioFechamento={data.data.informacoes.horarioFechamento}
