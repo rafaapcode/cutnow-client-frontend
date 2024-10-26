@@ -30,16 +30,16 @@ const BarberPage = () => {
                 ) : (
                   <>
                     <BarberPhoto
-                      foto={props.data.data.informacoes.foto}
+                      foto={props.data.data.informacoes ? props.data.data.informacoes.foto : "/default-photo.jpg"}
                       nome={props.data.data.nome}
                       barberId={id}
                       barbeariaId={props.data.data.barbearia_id}
                     />
                     <BarberDescription
-                      description={props.data.data.informacoes.descricao}
+                      description={props.data.data.informacoes ? props.data.data.informacoes.descricao : "Esse barbeiro não possui descrição"}
                     />
                     <BarberPortfolio
-                      data={props.data.data.informacoes.portfolio}
+                      data={props.data.data.informacoes ? props.data.data.informacoes.portfolio : []}
                     />
                   </>
                 )}
