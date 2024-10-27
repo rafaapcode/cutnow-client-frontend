@@ -97,6 +97,7 @@ const BarberCalendar = ({
                       id="service"
                       className="w-1/2 bg-neutral-700 p-2 border-none outline-none rounded-md"
                     >
+                      <option defaultChecked value="-">-</option>
                       <List
                         data={props.data.data}
                         resourceName="service"

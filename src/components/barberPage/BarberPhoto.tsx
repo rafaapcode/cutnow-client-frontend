@@ -34,9 +34,18 @@ const BarberPhoto = ({
   });
 
   const handleClick = async () => {
+    if(service == "-" || !service) {
+      toast.error("Selecione um serviço válido");
+      return;
+    }
+
+    if(!date) {
+      toast.error("Selecione uma data válida");
+      return;
+    }
+
     const { error, message } = await mutateAsync();
     if (isError) {
-      console.log("deu ruim");
       setDate("");
       setService("");
     } else {
@@ -54,13 +63,13 @@ const BarberPhoto = ({
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(e.target.value);
-  }, []);
+  }, [date]);
 
   const handleService = useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       setService(e.target.value);
     },
-    []
+    [service]
   );
 
   return (
