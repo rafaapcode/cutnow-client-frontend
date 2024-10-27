@@ -1,7 +1,7 @@
 import useAuth from "@/hooks/useAuth";
 import { useMutate } from "@/hooks/useMutate";
 import { RequestService } from "@/services/RequestService";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { toast } from "sonner";
 import BarberCalendar from "./BarberCalendar";
 
@@ -21,6 +21,7 @@ const BarberPhoto = ({
   const [date, setDate] = useState("");
   const [service, setService] = useState("");
   const { user } = useAuth();
+  const closeRef = useRef<any>(null);
 
   const { isError, isPending, mutateAsync } = useMutate({
     getData: RequestService.createRequest({
@@ -48,15 +49,18 @@ const BarberPhoto = ({
     if (isError) {
       setDate("");
       setService("");
+      closeRef.current?.closeModal()
     } else {
       if (error) {
         setDate("");
         setService("");
         toast.error(message);
+        closeRef.current?.closeModal()
       } else {
         setDate("");
         setService("");
         toast.success(message);
+        closeRef.current?.closeModal()
       }
     }
   };
@@ -84,6 +88,7 @@ const BarberPhoto = ({
       <div className="flex justify-between h-[15%] items-center">
         <h2 className="text-xl font-semibold">{nome}</h2>
         <BarberCalendar
+          ref={closeRef}
           isPending={isPending}
           barbeariaId={barbeariaId}
           handleService={handleService}

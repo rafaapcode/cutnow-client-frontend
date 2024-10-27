@@ -1,6 +1,7 @@
 import { BarbershopService } from "@/services/BarbershopService";
 import { useQueryClient } from "@tanstack/react-query";
 import { add, format } from "date-fns";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { CiCalendar } from "react-icons/ci";
 import DataProvider from "../DataProvider";
@@ -8,6 +9,7 @@ import List from "../List";
 import { Button } from "../ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -21,7 +23,7 @@ type IBarberCalendarProps = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleService: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   barbeariaId: string;
-  isPending: boolean;
+  isPending: boolean
 };
 
 function ListServices({ service }: { service: {nomeService: string; preco: number;} }) {
@@ -37,9 +39,10 @@ const BarberCalendar = ({
   handleClick,
   handleService,
   barbeariaId,
-  isPending,
-}: IBarberCalendarProps) => {
+  isPending
+}: IBarberCalendarProps, ref: any) => {
   const queryClient = useQueryClient();
+  const closeModal = useRef<HTMLButtonElement>(null);
 
   const handleMouseEnter = () => {
     queryClient.prefetchQuery({
@@ -48,12 +51,18 @@ const BarberCalendar = ({
     })
   };
 
+  useImperativeHandle(ref, () => {
+    return {
+      closeModal: () => closeModal.current?.click()
+    }
+  })
+
   return (
     <Dialog>
       <DialogTrigger onMouseEnter={handleMouseEnter} className="bg-[#D3FB3F] hover:bg-[#9cbb2c] p-1 rounded-md transition-all duration-100">
         <CiCalendar className="size-5 text-black" />
       </DialogTrigger>
-      <DialogContent className="bg-neutral-900 border-neutral-800 w-[95%] md:w-full">
+      <DialogContent ref={ref} className="bg-neutral-900 border-neutral-800 w-[95%] md:w-full">
         <DialogHeader>
           <DialogTitle>Solicite um agendamento</DialogTitle>
           <DialogDescription>
@@ -118,9 +127,10 @@ const BarberCalendar = ({
             }
           </Button>
         </DialogFooter>
+        <DialogClose ref={closeModal} className="hidden" />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default BarberCalendar;
+export default forwardRef(BarberCalendar);
