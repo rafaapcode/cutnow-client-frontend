@@ -1,12 +1,18 @@
-import { AllBarbershopsResponse, GetAllBarbershops, GetBarber, GetBarbershop, GetBarbershopByName, GetServices, Response } from "@/api/barbershops";
-
-
+import {
+  GetAllBarbershops,
+  GetBarber,
+  GetBarbershop,
+  GetBarbershopByName,
+  GetServices,
+} from "@/api/barbershops";
 
 export class BarbershopService {
-  static async GetAllBarbershop(): Promise<Response<AllBarbershopsResponse>> {
-    const allBarbershops = await GetAllBarbershops();
+  static GetAllBarbershop(userLat: number, userLong: number) {
+    return async () => {
+      const allBarbershops = await GetAllBarbershops(userLat, userLong);
 
-    return allBarbershops;
+      return allBarbershops
+    };
   }
 
   static GetBarbershopByName(name: string) {

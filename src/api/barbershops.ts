@@ -7,14 +7,10 @@ export type Response<T> = {
 };
 
 export type AllBarbershopsResponse = {
-  barbershops: {
-    id: string;
-    nomeDaBarbearia: string;
-    informacoes: {
-      logo: string;
-      status: string;
-    };
-  }[];
+  id: string;
+  nomeDaBarbearia: string;
+  logo: string;
+  status: string;
 };
 
 export type BarbershopByNameResponse = {
@@ -42,16 +38,14 @@ export type ServiceResponse = {
   preco: number;
 };
 
-export async function GetAllBarbershops(): Promise<
-  Response<AllBarbershopsResponse>
-> {
+export async function GetAllBarbershops(userLat: number, userLong: number): Promise<Response<AllBarbershopsResponse[]>> {
   try {
-    const { data } = await client.get("/barbershop");
-
+    const { data } = await client.get(`https://6rh4k5xs6eewbfmon6t5sbnlm40mbmme.lambda-url.us-east-1.on.aws?userlat=${userLat}&userlong=${userLong}&dist=5`);
+    console.log(data);
     return {
-      error: data.error,
-      message: data.message,
-      data: data.barbershops,
+      error: false,
+      message: "Barbearias encontradas",
+      data: data,
     };
   } catch (error: any) {
     console.log(error.response);
