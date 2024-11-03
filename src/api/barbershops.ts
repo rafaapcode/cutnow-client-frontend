@@ -1,4 +1,5 @@
 import client from "@/utils/axios";
+import axios from "axios";
 
 export type Response<T> = {
   error: boolean;
@@ -40,7 +41,7 @@ export type ServiceResponse = {
 
 export async function GetAllBarbershops(userLat: number, userLong: number): Promise<Response<AllBarbershopsResponse[]>> {
   try {
-    const { data } = await client.get(`https://6rh4k5xs6eewbfmon6t5sbnlm40mbmme.lambda-url.us-east-1.on.aws?userlat=${userLat}&userlong=${userLong}&dist=5`);
+    const { data } = await axios.get(`https://6rh4k5xs6eewbfmon6t5sbnlm40mbmme.lambda-url.us-east-1.on.aws?userlat=${userLat}&userlong=${userLong}&dist=15`);
     console.log(data);
     return {
       error: false,

@@ -3,34 +3,37 @@ import BarbershopsCard from "@/components/homePage/BarbershopsCard";
 import BarbershopsCardSkeleton from "@/components/homePage/BarbershopsCardSkeleton";
 import List from "@/components/List";
 import { BarbershopService } from "@/services/BarbershopService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HomePage = () => {
-  const [userCoord, setUserCoord] = useState({ userLat: 0, userLong: 0 });
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setUserCoord({
-          userLat: position.coords.latitude,
-          userLong: position.coords.longitude,
-        });
-      },
-      (err) => {
-        console.log("Posição aqui", err.message);
-      }
-    );
-  } else {
+  const [coord, setCoords] = useState<{ userLat: number; userlong: number } | null>(null);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCoords({
+            userLat: position.coords.latitude,
+            userlong: position.coords.longitude,
+          });
+        },
+        () => {
+          setCoords(null);
+        }
+      );
+    } else {
+      setCoords(null);
+    }
+  }, []);
+
+
+  if(!coord) {
     return (
       <div className="p-5">
-        <h2 className="text-lg md:text-xl">
-          Seu navegador não suporta A API DE GOELOCALIZAÇÃO. Acesse o site de
-          outro NAVEGADOR
-        </h2>
+        <h2>Habilite a localização do seu PC e  NAVEGADOR , para que possamos filtrar as barbearias mais próximas.</h2>
       </div>
-    );
+    )
   }
-
-  console.log("Coords",userCoord);
 
   return (
     <div>
@@ -39,7 +42,7 @@ const HomePage = () => {
       </div>
       <div className="h-[800px] lg:h-[700px] px-5 py-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-5 overflow-auto scroll-smooth">
         <DataProvider
-          getData={BarbershopService.GetAllBarbershop(-22.887814, -47.26974)}
+          getData={BarbershopService.GetAllBarbershop(coord.userLat, coord.userlong)}
           queryKey={["barbershops"]}
           render={(props: any) => {
             return (
