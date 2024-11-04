@@ -15,14 +15,10 @@ export type AllBarbershopsResponse = {
 };
 
 export type BarbershopByNameResponse = {
-  barbershops: {
-    id: string;
-    nomeDaBarbearia: string;
-    informacoes: {
-      logo: string;
-      status: string;
-    };
-  }[];
+  BarbershopName: string;
+  BarbershopImg: string;
+  Status: string;
+  Id: string;
 };
 
 export type BarberResponse = {
@@ -39,9 +35,14 @@ export type ServiceResponse = {
   preco: number;
 };
 
-export async function GetAllBarbershops(userLat: number, userLong: number): Promise<Response<AllBarbershopsResponse[]>> {
+export async function GetAllBarbershops(
+  userLat: number,
+  userLong: number
+): Promise<Response<AllBarbershopsResponse[]>> {
   try {
-    const { data } = await axios.get(`https://6rh4k5xs6eewbfmon6t5sbnlm40mbmme.lambda-url.us-east-1.on.aws?userlat=${userLat}&userlong=${userLong}&dist=15`);
+    const { data } = await axios.get(
+      `https://6rh4k5xs6eewbfmon6t5sbnlm40mbmme.lambda-url.us-east-1.on.aws?userlat=${userLat}&userlong=${userLong}&dist=15`
+    );
     console.log(data);
     return {
       error: false,
@@ -59,15 +60,29 @@ export async function GetAllBarbershops(userLat: number, userLong: number): Prom
 
 export async function GetBarbershopByName(
   nome: string
-): Promise<Response<BarbershopByNameResponse>> {
+): Promise<Response<BarbershopByNameResponse[]>> {
   try {
     const { data } = await client.get(
       `/barbershop/barbershopbyname?name=${nome}`
     );
+    console.log(data.barbershops);
+    if (!data.barbershops) {
+      return {
+        error: data.error,
+        message: data.message,
+      };
+    }
+    const barbershops = data.barbershops.map((barbershop: any) => ({
+      Id: barbershop.id,
+      BarbershopName: barbershop.nomeDaBarbearia,
+      BarbershopImg: barbershop.informacoes.logo,
+      Status: barbershop.informacoes.status,
+    }));
+    
     return {
       error: data.error,
       message: data.message,
-      data: data.barbershops,
+      data: barbershops,
     };
   } catch (error: any) {
     console.log(error.response);
