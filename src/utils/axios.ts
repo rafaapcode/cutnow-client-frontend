@@ -2,7 +2,7 @@ import axios from "axios";
 import { storageKeys } from "../config/storageKeys";
 
 const client = axios.create({
-  baseURL: "http://localhost:3000"
+  baseURL: "https://cutnow-client-backend-462529521907.us-central1.run.app"
 });
 
 client.interceptors.request.use(
